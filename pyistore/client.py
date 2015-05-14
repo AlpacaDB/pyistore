@@ -48,7 +48,11 @@ class Server(object):
         payload = {}
         if metadata is not None:
             payload['metadata'] = json.dumps(metadata)
-        resp = requests.put(url, data=payload)
+
+        if ispost:
+            resp = requests.post(url, data=payload)
+        else:
+            resp = requests.put(url, data=payload)
 
         return resp.json()
 
